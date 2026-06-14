@@ -1,0 +1,767 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git and Terminal Commands</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0bfba151-5f99-49ff-9e14-5be061d48184" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/gradients_5.png" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🐙</span></div><h1 class="page-title">Git and Terminal Commands</h1><p class="page-description"></p></header><div class="page-body"><p id="be784c4d-29eb-440e-8507-f51310b79122" class=""><a href="https://www.nobledesktop.com/blog/what-is-git-and-why-should-you-use-it">What Is Git &amp; Why Should You Use It? | Noble Desktop Blog</a></p><p id="718c5320-e8c5-43c6-8c6e-1d23b82a4bf2" class=""><a href="https://www.brainstormcreative.co.uk/git-bash/how-to-change-the-display-name-in-git-bash/">How to change the display name in Git bash prompt</a></p><p id="aacd0682-8b8d-47a9-975c-a4bcb678f6b8" class="">
+</p><p id="239dfdb4-56b6-479f-bc58-5e2e214ef0c7" class=""><mark class="highlight-blue_background"><strong>GIT STATE MECHANISM:</strong></mark></p><ul id="d8c6349c-3fe8-4ca3-ac6d-0f7864ca635f" class="toggle"><li><details open=""><summary>[ <mark class="highlight-gray_background">Working Directory (Workspace)</mark> | <mark class="highlight-blue_background">Staging Area (Index)</mark> | <mark class="highlight-teal_background">Local Repository</mark> ] → <mark class="highlight-yellow_background">Remote Repository</mark></summary><figure id="0d201509-c71c-4b34-9aa9-c3e05ef8ea0f" class="image" style="text-align:left"><a href="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled.png"><img style="width:481px" src="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled.png"/></a></figure></details></li></ul><p id="d60227e9-ad51-4887-a4db-100c5e6513a6" class=""><strong><mark class="highlight-blue_background">GIT TYPE OF FILES:</mark></strong></p><ul id="ed140320-88e3-4b13-a7ce-df8619bf800d" class="toggle"><li><details open=""><summary>Tracked and Untracked Files</summary><p id="7f96a322-36fd-4e83-bedb-4179ae070b3a" class="">Each file in your working directory can be in one of two states: <strong>tracked</strong><em><strong> </strong></em>or <strong>untracked.</strong></p><ul id="6dee9e95-2901-449b-83ed-bb38d68e1211" class="bulleted-list"><li style="list-style-type:disc"><strong>Tracked Files:</strong> files that were in the last snapshot, as well as any newly staged files.<br/>▶ Unmodified<br/>▶ Modified: tracked files that have been changed since the last commit.<br/>▶ Staged<br/></li></ul><ul id="7c2bca65-6ef3-4104-9858-561545ab877c" class="bulleted-list"><li style="list-style-type:disc"><strong>Untracked Files:</strong> any files in your working directory that were not in your last snapshot and are not in your staging area.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e6ed986c-67ff-4595-95a9-9202bcd40367" class="code"><code class="language-Bash">$ git status
+On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        test.txt</code></pre></li></ul></details></li></ul><p id="6a73ebe7-c4e7-4065-bda4-8c07446dc1d4" class=""><mark class="highlight-blue_background"><strong>GIT COMMANDS:</strong></mark></p><p id="71492a95-86d7-41fd-aa44-611978cea754" class="">Done:</p><ul id="c8a851a3-8ac2-4a55-9004-c6ca500d5466" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git config </mark>(commands regarding the configuration of git)</summary><ul id="e1d4cb11-18c0-4758-a107-2e5902c62c19" class="bulleted-list"><li style="list-style-type:disc"><code><code><mark class="highlight-blue">git config –-global user.email &#x27;email&#x27;</mark></code></code><code><mark class="highlight-orange"> </mark></code>(Change global user email)</li></ul><ul id="036a4981-f810-4234-94f2-7ba3a3530179" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git config –-global user.name ‘name’</mark></code><mark class="highlight-blue"> </mark>(Change global user name)</li></ul><ul id="fe285584-f3bb-47d3-9d5f-796e2a9ce458" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git config –-list</mark></code><mark class="highlight-blue"> </mark>(Show all user characteristics)<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bbe8314c-878a-4092-b5b8-2712b1ba2e36" class="code"><code class="language-Bash">$ git config --list
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+core.editor=&quot;C:\\Program Files\\Sublime Text 3\\subl.exe&quot; -w
+pull.rebase=false
+credential.helper=manager
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=master
+user.email=danieltrivino11+git@gmail.com
+user.name=danieltrivino1
+difftool.sourcetree.cmd=&#x27;&#x27;
+mergetool.sourcetree.cmd=&#x27;&#x27;
+mergetool.sourcetree.trustexitcode=true
+core.protectntfs=false
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.symlinks=false
+core.ignorecase=true</code></pre></li></ul></details></li></ul><ul id="5dfd30e1-6cf6-4915-a5c1-0087055f0bce" class="toggle"><li><details open=""><summary>branches</summary><ul id="7fdbfbe4-6a6b-471c-9eda-b6317f2e4bb5" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git branch</mark></code> (see local branches only)</li></ul><ul id="2f5418ff-58dd-441a-9630-662fba5dce76" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git branch -r</mark></code><mark class="highlight-blue"> </mark>(see remote branches only)</li></ul><ul id="5d572b58-80f1-421c-b330-82be34eb0522" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git branch -a</mark></code> (see both local and remote branches)<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5138d1ad-881d-41ae-bf54-df8e6ec00564" class="code"><code class="language-Bash">$ git branch -a
+  hw1_Daniel_Trivino
+  hw2_Daniel_Trivino
+* hw3_Daniel_Trivino | The * means this is the current branch
+  main
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/HW-2-Qi-Zhang
+  remotes/origin/HW2-Amir-Mani
+  remotes/origin/HW2_Fengjie_Zhang</code></pre></li></ul><ul id="03893b63-6bd0-4c55-b781-26b0dffc5026" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git checkout &lt;branch name&gt;</mark></code><mark class="highlight-blue"> (</mark>switch to a branch)</li></ul><ul id="614f4685-e0d7-434c-bfad-85cf99e6d5af" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git checkout -b &lt;branch name&gt;</mark></code><mark class="highlight-blue"> </mark>(create a new branch and switch to it)</li></ul><ul id="4efdd562-742b-487b-b00b-08fdf65bbbe9" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git branch -d &lt;branch name&gt;</mark></code><mark class="highlight-blue"> </mark>(delete a local branch)</li></ul></details></li></ul><ul id="ecc6e6c8-0b23-4379-95f8-8150af03ca13" class="toggle"><li><details open=""><summary>Push a local dev branch to create a Pull Request (PR)</summary><p id="1dc80aa7-af11-4c07-8575-2fa94e80c756" class="">Creating a pull request (PR) from a local branch to a GitHub repository is an essential part of collaborative development workflows. This process allows you to propose changes, have them reviewed, and then merged into a target branch (commonly the main or master branch). Here&#x27;s a step-by-step guide to creating a pull request on GitHub:</p><p id="221b9693-7c56-402a-8c0b-4cdf00e51d20" class=""><strong>Step 1:</strong> <strong>Commit and Push Your Local Changes</strong></p><p id="e8ac95a7-1f7e-42ba-9a7c-cdaf7ca174d1" class="">Before you create a pull request, you need to commit your changes to your local branch and then push the branch to the remote repository on GitHub.</p><ol type="1" id="5dff58e5-e88b-42c1-97b8-99a7563c9c84" class="numbered-list" start="1"><li><strong>Commit Your Changes Locally </strong>(Ensure all your changes are committed to your local branch).<p id="534734f6-c850-4027-ab90-ee047759c6ab" class=""><code><mark class="highlight-blue">git add .</mark></code></p><p id="79243c3a-de87-4573-bd45-125e9605a6cb" class=""><code><mark class="highlight-blue">git commit -m &#x27;message&#x27;</mark></code></p></li></ol><ol type="1" id="406ec3ef-a08b-46bb-a2a5-d88c33f413de" class="numbered-list" start="2"><li><strong>Push Your Branch to GitHub</strong>: (Replace <code><strong>local-branch-name</strong></code> with the name of your local branch).<p id="0903bcab-6874-41ed-84d0-6f6ba942c6ce" class=""><code><mark class="highlight-blue">git push origin &lt;local-branch-name&gt;</mark></code></p></li></ol><p id="ccd0b1fa-b903-4211-a1c5-93031cffa731" class=""><strong><strong>Step 2: Create the Pull Request on GitHub</strong></strong></p><p id="90c6e3ca-f816-4561-a160-4414797dc410" class=""><strong>Step 3:</strong> <strong><strong>Update Local Main Branch After Pull Request Merge</strong></strong><div class="indented"><p id="416f412e-a4e9-4855-8202-cbb956752ee8" class=""><code><mark class="highlight-blue">git checkout main</mark></code></p><p id="feaa256e-a7be-41d1-8954-9ae4d4334ce7" class=""><code><mark class="highlight-blue">git pull origin main</mark></code></p></div></p><p id="b9c65a09-283a-49eb-986d-7b6f1aeea722" class=""><strong>Step 4:</strong> <strong><strong>Update Other Local Branches and Push to Remote Dev</strong></strong><div class="indented"><p id="3787ea97-748c-4fcc-9dbe-c4202d898eb7" class=""><code><mark class="highlight-blue">git checkout &lt;local-branch-name&gt;</mark></code></p><p id="837ec5b1-3f43-4ee6-9512-d59fbb974741" class=""><code><mark class="highlight-blue">git merge main</mark></code></p><p id="bf718f8a-9214-4308-ba0a-e07e52f8a86d" class=""><code><mark class="highlight-blue">git push origin &lt;local-branch-name&gt;</mark></code></p></div></p><p id="07d986f5-65d0-4220-96b2-7151c9d9fbe7" class=""><mark class="highlight-blue">git log </mark>(shows the historical commit which includes the authors and dates)</p></details></li></ul><ul id="de66cf7f-bafb-4873-84a2-bc81064c3e38" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git clean </mark>(remove <strong>untracked</strong> files from the working tree)</summary><p id="0afb5cb5-1cfa-48d2-b8be-c394fca6e19b" class=""><code><mark class="highlight-blue">git clean -f</mark></code><mark class="highlight-blue"> </mark>remove untracked files from the current path (not recursive)</p><p id="29787b8d-3868-4647-ad50-192fb5a0ae3c" class=""><mark class="highlight-blue"><code>git clean -df</code></mark><mark class="highlight-blue"> </mark>remove untracked files from the current path (recursive)</p><ul id="ae8e8ea3-d4d9-4b1c-94d0-b9e2ff19c829" class="bulleted-list"><li style="list-style-type:disc">Source: <a href="https://git-scm.com/docs/git-clean">Git - git-clean Documentation (git-scm.com)</a></li></ul></details></li></ul><ul id="6ee8e1b0-16c1-4ed2-b557-5d8e58a49cc6" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git reset </mark>(revert changes) - Revert commits</summary><p id="b8ecbe5b-d6f8-4fb6-b867-8fb9f210679f" class="">Mixed Mode:</p><ul id="a43de7a0-5302-4eed-aece-87063126f66c" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git reset</mark></code> (move files from staging area to the working directory) / <mark class="highlight-blue"><code>git restore —staged</code></mark><mark class="highlight-blue"> </mark>achieves the same result</li></ul><p id="2259899c-e495-4568-98b4-41502f1b31a4" class="">Soft Mode:</p><ul id="d22733de-179c-49ea-af4d-cc0a47ceca75" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git reset --soft HEAD~&lt;# of commits to remove&gt;</mark></code><mark class="highlight-blue"> </mark>(move files with changes up to a given commit in the local repository back to the staging area - the commit is removed)</li></ul><ul id="aa48620f-6667-4805-86e6-23955603f257" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git reset --soft HEAD~&lt;commit hash indicating prior commits to that hash will be removed&gt;</mark></code><mark class="highlight-blue"> </mark>(the commit hash is a long number that identifies each commit and can be found with git log)</li></ul><p id="ee885bbf-92da-42f9-be25-a367b354db0d" class="">Hard More:</p><ul id="c8a6556a-37ab-4e76-8a36-f64aa4b05bbe" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git reset --hard HEAD~&lt;# of commits to remove&gt;</mark></code> (removes changes up to a given commit without moving files to the staging area - revert changes up to a given commit and permanently delete the changes)</li></ul><ul id="37662a88-aaea-4c7c-862b-b4b0fe1ce73e" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git reset --hard HEAD~&lt;commit hash indicating prior commits to that hash will be removed&gt;</mark></code><mark class="highlight-blue"> </mark>(the commit hash is a long number that identifies each commit and can be found with git log)</li></ul><p id="8e5970e2-3f83-42f1-9caa-192f8c103a5f" class="">❗If we want to push the branch with the reset commit history we need to use the command: <code>git push --force origin &lt;branch you are pushing from&gt;</code></p></details></li></ul><ul id="b2cab4c8-4513-462e-b249-c9681d033e9b" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git diff</mark> (review changes within working directory, staging area, and the local repository)</summary><p id="48853cf9-85b0-4c27-8b0d-6ebdfd72be24" class=""><code><mark class="highlight-blue">git diff</mark></code><mark class="highlight-blue"> </mark>(compare what’s in your working directory with what’s in your staging area - doesn’t return anything if working directory is empty - if staged area is empty, then it compares with last commit)</p><p id="cbbb2104-4659-4b29-9780-27eee6b0f9d5" class=""><code><mark class="highlight-blue">git diff –-staged /</mark></code><code> </code><code><mark class="highlight-blue">–-cached</mark></code><mark class="highlight-blue"> </mark>(compare what is in your staging area with what is in your last commit)</p></details></li></ul><ul id="0aee20c0-4125-4dfe-a4a9-504a7574a32b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git show</mark> (shows the difference ‘diff’ between the last two commits)</li></ul><ul id="997df37d-70a2-4cd2-bedc-e9a3d645666b" class="toggle"><li><details open=""><summary>merge</summary><ul id="ec50f91d-a9ae-444a-b39e-9afc7231ba30" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git merge &lt;name of branch you are merging from&gt;</mark></code><mark class="highlight-blue"> </mark>(join two or more development histories together - <strong>the current branch should be the one you are merging to</strong>)</li></ul><p id="ac6bd4f3-e43d-4428-801d-9c71883e2b22" class=""><strong>Auto Merge:</strong> when all changes in the code occur on different lines or in different files, git will successfully merge commits without your help. Even if git can perform auto merge, you can do a <strong>Manual Merge </strong>instead<strong> </strong>to make sure you are merging the right way - <mark class="highlight-purple">good practice</mark>:</p><ol type="1" id="59c527af-607c-4f5d-9fa6-e9e62f2c8b50" class="numbered-list" start="1"><li><code><mark class="highlight-blue">git checkout master</mark></code> (on local repository - make sure you are on your local master branch)</li></ol><ol type="1" id="1b1f5427-922e-473b-8cb4-50b2a5520822" class="numbered-list" start="2"><li><code><mark class="highlight-blue">git pull</mark></code></li></ol><ol type="1" id="9eda2108-1ede-4e7c-b18e-89fc9d4073c5" class="numbered-list" start="3"><li><mark class="highlight-blue"><code>git checkout dev_branch</code></mark> (change to the branch you want to merge)</li></ol><ol type="1" id="b5bfefa1-0a53-4b60-97f3-15f84ac15c4b" class="numbered-list" start="4"><li><mark class="highlight-blue"><code>git merge master -m ‘message’</code></mark></li></ol><p id="6e1130b2-575e-4048-9514-59af8f77b997" class="">When any change in the code occurs in common lines that have changes in the branch that you are merging to, there is a <strong>Merge Conflict:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d18ba484-c7fb-4a09-abfc-bea4df757c23" class="code"><code class="language-Bash">$ git merge master -m &#x27;merging to current branch&#x27;
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+conflicting line(s) of code from branch you are trying to merge to/current branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; master
+conflicting line(s) of code from branch you are trying to merge from/master</code></pre><p id="ebe3a98d-a5f5-4997-948d-3859c57f5845" class="">Fix the merge conflict:</p><ul id="8ad168f4-b836-419f-b353-2c420f3d3865" class="bulleted-list"><li style="list-style-type:disc">Modify the conflicting line(s) to the final version after agreeing on the changes. Then you should get the following:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="700ed0be-264c-46fd-8b48-999c773b0aab" class="code"><code class="language-Bash">$ git status
+
+On branch current
+You have unmerged paths.
+	(fix conflicts and run &#x27;git commit&#x27;)
+	(use &#x27;git merge --abort to abort the merge&#x27;)
+
+Unmerge paths:
+	(use &#x27;git add &lt;file&gt;...&#x27; to mark resolution)
+			both modified: test.txt
+
+$ git add .
+$ git commit -m &#x27;merge conflict addressed&#x27;
+</code></pre></details></li></ul><ul id="0f790fec-dde5-45bf-824e-06eb4eacd341" class="toggle"><li><details open=""><summary>rebase and squash</summary><p id="22efcc27-cec6-44d3-a76d-63d0876cbf67" class="">Rebasing is the process of moving or combining a sequence of commits to a new base commit <mark class="highlight-purple">to maintain a linear project history.</mark></p><figure id="fabcf73b-fcd2-4c03-90df-1f636c1d080e" class="image"><a href="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%201.png"><img style="width:384px" src="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%201.png"/></a></figure><p id="f1d5015d-918e-4825-a94b-1dc863e9d4db" class=""><strong>Rebase:</strong></p><ol type="1" id="1e318a67-907b-4921-8a2e-d9eacfeb108a" class="numbered-list" start="1"><li><code><mark class="highlight-blue">git checkout master</mark></code> (on local repository - make sure you are on your local master branch)</li></ol><ol type="1" id="b9709786-5f3a-4e69-89ab-fc12d3a97acf" class="numbered-list" start="2"><li><code><mark class="highlight-blue">git pull</mark></code></li></ol><ol type="1" id="73273cfa-5e2f-4b2e-8fa9-43757ee9ef53" class="numbered-list" start="3"><li><mark class="highlight-blue"><code>git checkout dev_branch</code></mark> (change to the branch you want to merge)</li></ol><ol type="1" id="3cda1702-0b9e-4dcc-92b3-8f901cef1ccb" class="numbered-list" start="4"><li><mark class="highlight-blue"><code>git rebase master</code></mark></li></ol><p id="c00955b6-f1cf-4bba-8910-e291c2e881b0" class=""><strong>Squash </strong>allows to combine multiple commits into one single commit - <mark class="highlight-red">SQUASH AFTER REBASING OR WHEN BRANCH IS AHEAD</mark></p><ol type="1" id="c8463e80-5f2b-4abf-9ece-a2343f37da26" class="numbered-list" start="1"><li><code><mark class="highlight-blue">git checkout master</mark></code> (on local repository - make sure you are on your local master branch)</li></ol><ol type="1" id="51ccffae-706a-401a-9562-a252cd4630a8" class="numbered-list" start="2"><li><code><mark class="highlight-blue">git pull</mark></code></li></ol><ol type="1" id="fc6b65ff-4845-4a14-9b52-70ea66c2aa58" class="numbered-list" start="3"><li><mark class="highlight-blue"><code>git checkout dev_branch</code></mark> (change to the branch you want to merge)</li></ol><ol type="1" id="ebd8ee77-e1d0-46db-9f42-d369f515889d" class="numbered-list" start="4"><li><code><mark class="highlight-blue">git rebase -i HEAD~&lt;# of commits to squash&gt;</mark></code><mark class="highlight-blue"> </mark>(-i means interactive and it allows to write a message in the terminal)</li></ol><ol type="1" id="a6bdc2a2-8583-404b-a484-ccddadfbb5b5" class="numbered-list" start="5"><li>Change pick to squash in the last commit you’d like to combine - Press <code><mark class="highlight-blue">i</mark></code> to insert, <code><mark class="highlight-blue">ESC</mark></code> to finalize insertion, and then type <code><mark class="highlight-blue">:wq</mark></code><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f0a9462b-3471-40e1-a8c2-9049fc4ccf7e" class="code"><code class="language-Bash"># Exmaple to squash/combine three commits
+&gt;&gt;&gt; --- Initial INSERT mode 
+pick 6633dt
+pick 551b00
+pick 1016c4
+&gt;&gt;&gt;
+pick 6633dt
+pick 551b00
+squash 1016c4
+
+:wq </code></pre></li></ol><p id="42320e37-20f1-4308-9734-6c5f376944ee" class="">
+</p></details></li></ul><ul id="6eabffd7-675a-4857-b3d2-5598242f7392" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git commit --amend</mark> <mark class="highlight-blue">-m ‘commit message’</mark> (amend the tip of the current branch) - How to edit the last commit?</summary><ol type="1" id="2170a67a-b3a4-41e8-904f-36fb177f967e" class="numbered-list" start="1"><li>Make sure to have your changes to modify the last commit in the staging area</li></ol><ol type="1" id="fc595d04-bdd9-423e-91bb-3c6133c02884" class="numbered-list" start="2"><li><code><mark class="highlight-blue">git commit --amend</mark></code></li></ol><ol type="1" id="56d5c70b-0c3b-4b08-bbb7-6d12dc7257a3" class="numbered-list" start="3"><li>Modify commit message in terminal. Press <code><mark class="highlight-blue">i</mark></code> to insert, <code><mark class="highlight-blue">ESC</mark></code> to finalize insertion, and then type <code><mark class="highlight-blue">:wq</mark></code></li></ol><p id="6469234d-831a-4354-893d-3855b3b9d947" class=""><mark class="highlight-red">NOTE:</mark> use <mark class="highlight-blue"><code>git commit —amend -m ‘commit message’</code></mark> to pass the new message and bypass the terminal insertion mode</p></details></li></ul><ul id="a3a47485-d8e0-4e29-abd5-9286eaf0f617" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git cherry-pick &lt;commit hash/id&gt;</mark> - How to move the commit from one branch to another?</summary><p id="80b16f91-7471-4384-9d1b-a4b70ce213ba" class="">One useful scenario is when there are multiple commits and one of them is required to be moved to another branch.</p><ol type="1" id="de828bea-30eb-489a-8bf2-8492172a4e72" class="numbered-list" start="1"><li><mark class="highlight-blue"><code>git checkout &lt;branch you want to move the commit to&gt;</code></mark><mark class="highlight-blue"> </mark>in the diagram below it would be hotfix branch</li></ol><ol type="1" id="5da61b43-96e2-4f40-bf0e-4a98a2a0111e" class="numbered-list" start="2"><li><mark class="highlight-blue"><code>git cherry-pick &lt;commit hash/id&gt;</code></mark><mark class="highlight-blue"> </mark>in the diagram below it would be the hash/id of commit r</li></ol><figure id="20ba5597-bfdd-4a1f-aabb-0939ae833d1a" class="image"><a href="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%202.png"><img style="width:384px" src="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%202.png"/></a></figure><p id="22b84e33-5f27-4ea2-8e76-56264d9be43a" class=""><mark class="highlight-red">NOTE:</mark> if there is a merge conflict make sure to solve them and execute command: <mark class="highlight-blue"><code>git cherry-pick —continue</code></mark></p></details></li></ul><ul id="14d00d80-e7bc-4055-83ae-1b93cd5cab46" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git bisect </mark>(find by binary search the change that introduced a bug) - How to identify which commit caused an issue in the code?</summary><ol type="1" id="bec5cc7b-564c-41ff-a200-d6d012c3d58f" class="numbered-list" start="1"><li><code><mark class="highlight-blue">git bisect start</mark></code><mark class="highlight-blue"> </mark>if using git bash as terminal - you’ll see as branch <mark class="highlight-blue">(current branch|BISECTING)</mark></li></ol><ol type="1" id="9bf4c160-516d-41b3-bd29-3c2f004797ce" class="numbered-list" start="2"><li><code><mark class="highlight-blue">git bisect bad &lt;commit hash/id&gt;</mark></code></li></ol><ol type="1" id="ea592cc2-529e-4913-bdf7-150ea4ab5314" class="numbered-list" start="3"><li><code><mark class="highlight-blue">git bisect good &lt;commit hash/id&gt;</mark></code><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="40c5ae9f-91ac-418b-ac00-373c660ed8ca" class="code"><code class="language-Plain Text"># --- OUTPUT ---
+Bisecting: 1/NUMBER revision left to test after this (roughly 1/NUMBER steps)
+[e7588c4b5026a8393a2e492eeb5e139ab128c185/HASH/ID] Changed 2022 to 2023 in the Copyright section/MESSAGE</code></pre></li></ol><ol type="1" id="f2acc033-24ae-4257-bff8-4d23117e579f" class="numbered-list" start="4"><li><mark class="highlight-blue"><code>git bisect good/bad</code></mark><mark class="highlight-blue"> </mark>This allows to move along the binary search <figure id="86a67cc6-8ac6-4523-837b-2d6cb9917cf7" class="image"><a href="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%203.png"><img style="width:480px" src="Git%20and%20Terminal%20Commands%200bfba1515f9949ff9e145be061d48184/Untitled%203.png"/></a></figure></li></ol></details></li></ul><ul id="28330095-fef8-4b29-80c6-a97975db73a9" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git checkout </mark>(go to a specific branch or commit) - ⚠️ <mark class="highlight-blue">git stash </mark>and git <mark class="highlight-blue">stash pop</mark></summary><ul id="163e43e3-a30e-4137-aad9-2cb6933c707a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>git checkout &lt;branch name&gt;</code></mark><mark class="highlight-blue"> </mark>checkout to a different branch</li></ul><ul id="26b72587-b07e-40cd-9690-471b8756f3b4" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-blue">git checkout &lt;branch commit hash/id&gt;</mark></code><mark class="highlight-blue"> </mark>checkout to a different commit → creates a <strong>‘detached HEAD’</strong> state<ul id="87f18966-39d6-4549-91a0-ca72a29fffa7" class="bulleted-list"><li style="list-style-type:circle">Once you travel to a given commit, you are in detached state. Thus, if you make more commits you’ll diverge from the history of the branch. To solve this issue, you can <strong>cut the branch </strong>by creating a new one: <mark class="highlight-blue"><code>git checkout -b &lt;new branch name&gt;</code></mark></li></ul></li></ul><p id="7d0ada76-d161-4bd7-92e7-46a7600a0028" class="">⚠️ <mark class="highlight-red">IF YOU CHECKOUT TO ANOTHER BRANCH WITHOUT COMMITTING CHANGES, THOSE CHANGES WILL BE MERGED/TRANSFERED TO THE CHECKED BRANCH - SOLUTION → </mark><strong><mark class="highlight-red">STASH</mark></strong><mark class="highlight-red">:</mark><div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="649ebd2f-d0a0-454f-801c-a761beaa9e84" class="code"><code class="language-Plain Text">$ git checkout another_branch
+M     file.txt     ---&gt; These changes will be merged to another_branch if not stashed
+Switched to branch &#x27;another_branch&#x27;</code></pre></div></p><ul id="65ec5142-9e66-4dfc-be0e-43b88badcf5d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>git stash</code></mark> (save the changes in a ‘dirty’ working directory away) - Now you can checkout to another branch</li></ul><ul id="c44ba0e1-6087-4e25-8f6e-48e532714c6f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>git stash pop</code></mark><mark class="highlight-blue"> </mark>bring back staged changes to current branch. Usually run when back to stashed branch</li></ul></details></li></ul><ul id="5c4a2c32-f007-44ff-9a0d-dd3805b7d8ae" class="toggle"><li><details open=""><summary><mark class="highlight-blue">git blame &lt;file name&gt;</mark> (show what revision and author last modified each line of a file)</summary><p id="65bc7938-8689-4207-81bb-dfd337ffc4e6" class="">This is useful to get detail information regarding the changes in a file line by line.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2c697752-331a-4596-8af9-24cb0e6177b3" class="code"><code class="language-Plain Text">(base) name.lastname@C02YW8GSLVCF git_test % git blame test.txt
+6416bd27 (namelastname 2023-02-07 14:30:58 -0600 1) Line 1
+8e15dc0d (namelastname 2023-02-07 14:31:14 -0600 2) Line 2
+d5572c1e (namelastname 2023-02-08 14:42:46 -0600 3) Line 3 fix in bug branch - decided to leave this code
+eae6926d (namelastname 2023-02-07 14:31:34 -0600 4)</code></pre></details></li></ul><ul id="32fc0bce-86bb-4854-85b7-5f9a5d51183d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git init</mark> (Transform the current directory into a Git repository)</li></ul><ul id="4bdcd6e2-f217-442c-9ae4-c36ab0177909" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git init &lt;directory name&gt; </mark>(Create an empty Git repository in the specified directory)</li></ul><ul id="4da0d857-b2b3-417d-aab1-5fce18675f99" class="bulleted-list"><li style="list-style-type:disc"><code>rm -rf .git</code> to undo git init</li></ul><ul id="95b2e4f9-618c-454b-ad83-d12f8560187e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git clone &lt;HTTPS/SSH&gt;</mark> (Clone a remote repository to a local one)</li></ul><ul id="523a5d57-8fab-4bbd-8792-70aec6a96211" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git status </mark>(Displays the state of the working directory and the staging area)</li></ul><ul id="05ac8e14-37da-4d70-845a-bba5eafaa49c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git add &lt;file name&gt; </mark>(Pass a file to the staging area. Makes git track a file)</li></ul><ul id="6f23eb6e-7a94-40c7-9a46-d9a38b4a49de" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git add . </mark>(Pass everything in the path to the staging area. Makes git track the contents of a path)</li></ul><ul id="a1904b26-d2d7-4715-a722-5016ab3290ff" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git add</mark> <mark class="highlight-blue">&lt;folder name&gt; </mark>(pass the contents of a folder to the staging area. Makes git track the files in a folder)</li></ul><ul id="9e30a9a7-8c94-4b68-bed9-b5b085b38e55" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git commit -m ‘message’</mark> (record changes to the repository)</li></ul><ul id="b25d91eb-5830-43a3-a2a2-70d73c50a182" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git push --set-upstream origin &lt;name of branch you are pushing from&gt; </mark>(push branch to the remote repository - origin represents the remote repository)</li></ul><ul id="a6f0fab8-e507-43dc-8305-bed727546f29" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">git pull &lt;remote&gt; &lt;branch&gt;</mark> (fetch from and merge with another repository or a local branch)</li></ul><p id="52a332c7-59bd-4ff4-aeff-10d8f67d6129" class="">
+</p><p id="9a2835ee-7694-4310-81ca-f405092cec94" class="">
+</p><p id="d6b20034-6483-459b-b555-6414c9e5342d" class="">
+</p><p id="3c1c8fcb-5055-4e2b-ac28-d50b9b00b0e1" class="">
+</p><ul id="b5a4e2fd-f923-414a-912d-b3b34ca7ffee" class="toggle"><li><details open=""><summary>Overwrite Local Files with Git Pull</summary><p id="9164f3f9-e204-4244-a1e0-6d3e07bee7b7" class="">If you feel the need to discard all your local changes and just reset/overwrite everything with a copy from the remote branch, then you should follow this guide. Important: If you have any local changes, they will be lost. With or without <code>--hard</code><br/> option, any local commits that haven’t been pushed will be lost.<br/></p><p id="268cbbec-2545-4889-88d2-ec4a0d940868" class=""><strong>The Overwrite workflow:</strong></p><p id="f1ab14a3-3e6d-4d39-a080-54301ab867e1" class="">To overwrite your local files do:</p><p id="fa4a0fe3-f520-4346-a860-cef601c37156" class=""><mark class="highlight-blue">git fetch --all</mark> (Downloads the latest from remote without trying to merge or rebase anything).</p><p id="18123e37-7b02-4c60-9c34-7e76a3983fdf" class=""><mark class="highlight-blue">git reset --hard</mark> &lt;remote&gt;/&lt;branch_name&gt; (Then the git reset resets the master branch to what you just fetched. The --hard option changes all the files in your working tree to match the files in origin/master).</p><p id="5280859a-21f7-40b5-a265-885b60557a77" class=""><a href="https://www.freecodecamp.org/news/how-to-override-local-files-with-git-pull/">How to Overwrite Local Files with Git Pull (freecodecamp.org)</a></p></details></li></ul><p id="5f65f27b-2974-4a16-984c-ad1d0677c58d" class=""> <mark class="highlight-blue_background"><strong>TERMINAL WINDOWS COMMANDS:</strong></mark></p><ul id="8968ae98-695c-4817-86fe-1a90905e4c9c" class="toggle"><li><details open=""><summary>How to change back-slash to forward-slash</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="677a3c4a-dce5-4872-97a6-24be2bc48d3d" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">set &quot;variable=C:\Users\dpedr\OneDrive\Documents\01_Education\Higher_education\Berkeley_MFE\Ready_trade_go\Python&quot;
+set &quot;variable=%variable:\=/%&quot;
+cd !var!
+
+set &quot;string=\OneDrive\Documents\01_Education\Higher_education\Berkeley_MFE\Ready_trade_go\Python&quot;
+echo %string:\=/%
+
+set &quot;string=D:\path\to\folder&quot;
+echo %string:\=/%</code></pre></details></li></ul><ul id="7ee49105-b777-4452-9200-d1d980fd9ec3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">ls</mark> (Lists folders and files on a given path but it doesn’t including hidden ones)</li></ul><ul id="4ac98d6a-16a1-4fd2-ad3b-146d509aa98a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">ls -a</mark> (Lists folders and files on a given path including hidden ones)</li></ul><ul id="ecf89ae1-f4f6-4c6e-a0ba-d85d0422fa32" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">touch &lt;file name&gt; </mark>(Create a file in the repository)</li></ul><ul id="608cb0f0-1956-4cf6-bed8-a07c57d879b6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">rm </mark>(It is the remove command.<mark class="highlight-blue"> </mark>By default, it cannot remove directories and only works on files) - <a href="https://www.geeksforgeeks.org/rm-rf-command-in-linux-with-examples/">rm -rf Command in Linux With Examples - GeeksforGeeks</a></li></ul><ul id="bb5608af-4084-4098-bae4-1c13c6ae6e2f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">rm -r </mark>(It is the remove command. It allows to remove directories recursively which means it deletes subdirectories and files)</li></ul><ul id="4a25752e-4426-4054-b071-bf89e511ee24" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">cd ~/ </mark>(Takes you to the home directory. i.e: /c/Users/dpdr)</li></ul><ul id="b7664607-509c-473b-a294-126ad826630d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">cp</mark> (Copy files and directories - <a href="https://www.geeksforgeeks.org/cp-command-linux-examples/">cp command in Linux with examples - GeeksforGeeks</a>)</li></ul><p id="f8a48ffb-6dd9-4970-be6a-599f1e2124af" class=""><strong><mark class="highlight-blue_background">TERMINAL LINUX COMMANDS:</mark></strong></p><ul id="423ca056-c881-46bd-92b3-6c09599a9a6b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">clear </mark>(Clear terminal)</li></ul><ul id="9411d437-8363-46db-8c05-2024db44a5ab" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">ls -a </mark>(show all files including hidden ones)</li></ul><ul id="e6882ebe-74a5-4c99-8b1b-373a994f9b8c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue">close </mark>(Clone a repository that already exists)</li></ul><p id="71943c4f-9b58-4711-a3df-f2c0ab9991dc" class="">
+</p><figure id="2eb44c3b-cab9-4045-beaa-0d68a46f072a"><div class="source"><a href="https://explainshell.com/">https://explainshell.com/</a></div></figure><p id="deb66ed6-6402-4d70-9c5e-0fab4e57659c" class=""> </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
