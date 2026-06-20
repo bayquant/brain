@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Terminal.md",
+                "file": "Git and GitHub.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Terminal"
+              "title": "Git and GitHub"
             }
           }
         ]
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Terminal.md",
+                "file": "Git and GitHub.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Terminal"
+              "title": "Backlinks for Git and GitHub"
             }
           },
           {
@@ -171,6 +171,8 @@
   },
   "active": "e8feebcdadf654fe",
   "lastOpenFiles": [
+    "CLAUDE.md",
+    "Terminal.md",
     "Institutions.md",
     "Brain.base",
     "Ports and Adapters.md",
@@ -181,7 +183,6 @@
     "Software Architecture Patterns/Software Architecture Patterns.md",
     "UV Astral.md",
     "Software Architecture Patterns",
-    "Terminal.md",
     "Git and GitHub.md",
     "Git and GitHub.md.tmp.99578.a5469dffe469",
     "Untitled.canvas",
@@ -189,7 +190,6 @@
     "Advanced Futures Trading Strategies.md",
     "Advanced Futures Trading Strategies.md.tmp.99578.5ad6d7ad89d9",
     "Notes Index.md",
-    "CLAUDE.md",
     "Trading System.md",
     "Agent.md",
     "Brain 🧠.md",

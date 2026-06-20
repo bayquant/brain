@@ -333,6 +333,30 @@ git checkout -b <branch> v1.0.0    # Create a branch from a tag
 
 ---
 
+## Claude
+
+### git worktree
+
+Check out multiple branches at once in separate directories, all sharing the same `.git`.
+
+```bash
+git worktree add <path> <branch>          # Create worktree for an existing branch
+git worktree add -b <new-branch> <path>   # Create worktree with a new branch
+git worktree list                         # Show all worktrees
+git worktree remove <path>                # Remove a worktree
+```
+
+### Worktree Workflow
+
+Claude Code can isolate an agent's changes in their own worktree instead of touching the main working copy:
+
+- `Agent` tool with `isolation: "worktree"` runs a subagent against a temporary worktree. If the agent makes no changes, the worktree is cleaned up automatically; otherwise the resulting path and branch are returned for review.
+- `EnterWorktree` / `ExitWorktree` tools enter and leave a worktree context directly.
+
+This keeps experimental or parallel agent work from touching the user's actual checkout until the result is reviewed and merged.
+
+---
+
 ## GitHub
 
 - [Rule sets for branches and tags](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)
