@@ -3,20 +3,20 @@ tags: [git, github, workflow]
 ---
 # Git and GitHub
 
-## Git State Mechanism
+## GIT STATE MECHANISM
 
 ```
 [Working Directory] → [Staging Area (Index)] → [Local Repository] → Remote Repository
 ```
 
-## File Types
+## FILE TYPES
 
 - **Tracked**: files in the last snapshot — can be Unmodified, Modified, or Staged
 - **Untracked**: files not in the last snapshot and not in the staging area
 
 ---
 
-## Core Commands
+## CORE COMMANDS
 
 | Command | Purpose |
 |---|---|
@@ -35,7 +35,7 @@ tags: [git, github, workflow]
 
 ---
 
-## Configuration
+## CONFIGURATION
 
 ```bash
 git config --global user.email 'email'   # Set global email
@@ -45,7 +45,7 @@ git config --list                         # Show all config values
 
 ---
 
-## Branches
+## BRANCHES
 
 ```bash
 git branch                    # List local branches
@@ -58,7 +58,7 @@ git branch -d <branch>        # Delete a local branch
 
 ---
 
-## Pull Request Workflow
+## PULL REQUEST WORKFLOW
 
 **1. Stage, commit, and push your branch:**
 ```bash
@@ -84,7 +84,7 @@ git push origin <branch>
 
 ---
 
-## Overwrite Local Files with Remote
+## OVERWRITE LOCAL FILES WITH REMOTE
 
 ```bash
 git fetch --all                             # Download latest without merging
@@ -93,7 +93,7 @@ git reset --hard <remote>/<branch>          # Reset to match remote exactly (loc
 
 ---
 
-## diff
+## DIFF
 
 ```bash
 git diff                    # Working directory vs staging area
@@ -102,7 +102,7 @@ git diff --staged           # Staging area vs last commit (also: --cached)
 
 ---
 
-## reset — Revert Commits
+## RESET — REVERT COMMITS
 
 **Mixed (default):** unstage files, keep changes in working directory
 ```bash
@@ -128,7 +128,7 @@ git reset --hard <commit-hash>
 
 ---
 
-## clean — Remove Untracked Files
+## CLEAN — REMOVE UNTRACKED FILES
 
 ```bash
 git clean -f      # Remove untracked files (non-recursive)
@@ -137,7 +137,7 @@ git clean -df     # Remove untracked files and directories (recursive)
 
 ---
 
-## merge
+## MERGE
 
 ```bash
 git merge <branch>   # Merge branch into current branch
@@ -168,7 +168,7 @@ git commit -m 'merge conflict addressed'
 
 ---
 
-## rebase
+## REBASE
 
 Moves commits to a new base to maintain a **linear history**.
 
@@ -179,7 +179,7 @@ git checkout <dev-branch>
 git rebase master
 ```
 
-### Interactive rebase with `-i` and pick options (`-p`)
+### INTERACTIVE REBASE WITH `-i` AND PICK OPTIONS (`-p`)
 
 `git rebase -i` opens an editor listing commits, each prefixed with a command. Change the command to control what happens to each commit:
 
@@ -208,7 +208,7 @@ git rebase --skip       # Skip the current conflicting commit
 
 ---
 
-## squash — Combine Commits
+## SQUASH — COMBINE COMMITS
 
 Squash after rebasing or when branch is ahead. Run squash only when your branch is already up to date.
 
@@ -221,7 +221,7 @@ Press `i` to insert, `ESC` when done, then `:wq` to save.
 
 ---
 
-## commit --amend — Edit Last Commit
+## COMMIT --AMEND — EDIT LAST COMMIT
 
 ```bash
 git commit --amend -m 'new message'     # Amend message directly
@@ -235,7 +235,7 @@ git push --force-with-lease
 
 ---
 
-## cherry-pick — Move a Commit to Another Branch
+## CHERRY-PICK — MOVE A COMMIT TO ANOTHER BRANCH
 
 ```bash
 git checkout <target-branch>
@@ -246,7 +246,7 @@ git cherry-pick --continue
 
 ---
 
-## checkout + stash
+## CHECKOUT + STASH
 
 ```bash
 git checkout <branch>           # Switch branch
@@ -263,7 +263,7 @@ git stash pop      # Restore stashed changes on current branch
 
 ---
 
-## blame — Who Changed What
+## BLAME — WHO CHANGED WHAT
 
 ```bash
 git blame <file>    # Show author, date, and commit for each line
@@ -271,7 +271,7 @@ git blame <file>    # Show author, date, and commit for each line
 
 ---
 
-## bisect — Find the Commit That Introduced a Bug
+## BISECT — FIND THE COMMIT THAT INTRODUCED A BUG
 
 Binary search through commit history.
 
@@ -286,7 +286,7 @@ git bisect good   # or: git bisect bad
 
 ---
 
-## tags — Mark Specific Points in History
+## TAGS — MARK SPECIFIC POINTS IN HISTORY
 
 Tags are refs that point to a specific commit — typically used to mark releases.
 
@@ -333,11 +333,11 @@ git checkout -b <branch> v1.0.0    # Create a branch from a tag
 
 ---
 
-## Claude
-
-### git worktree
+## WORKTREE
 
 Check out multiple branches at once in separate directories, all sharing the same `.git`.
+
+### GIT
 
 ```bash
 git worktree add <path> <branch>          # Create worktree for an existing branch
@@ -346,23 +346,29 @@ git worktree list                         # Show all worktrees
 git worktree remove <path>                # Remove a worktree
 ```
 
-### Worktree Workflow
+### CLAUDE
 
 Claude Code can isolate an agent's changes in their own worktree instead of touching the main working copy:
 
 - `Agent` tool with `isolation: "worktree"` runs a subagent against a temporary worktree. If the agent makes no changes, the worktree is cleaned up automatically; otherwise the resulting path and branch are returned for review.
 - `EnterWorktree` / `ExitWorktree` tools enter and leave a worktree context directly.
 
-This keeps experimental or parallel agent work from touching the user's actual checkout until the result is reviewed and merged.
+Launch Claude Code scoped to a specific worktree by name:
+
+```bash
+claude --worktree <name>    # Open Claude Code in the worktree with that name
+```
+
+The `<name>` matches the worktree name shown in `git worktree list`.
 
 ---
 
-## GitHub
+## GITHUB
 
 - [Rule sets for branches and tags](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)
 
 ---
 
-## Terminal
+## TERMINAL
 
 See [[Terminal]].

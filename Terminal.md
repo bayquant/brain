@@ -3,7 +3,7 @@ tags: [terminal, shell, macos]
 ---
 # Terminal
 
-## Common Commands
+## COMMON COMMANDS
 
 ```bash
 ls              # List files (no hidden)
@@ -16,7 +16,7 @@ cp              # Copy files or directories
 clear           # Clear terminal
 ```
 
-## Environment Variables
+## ENVIRONMENT VARIABLES
 
 **Check:**
 ```bash

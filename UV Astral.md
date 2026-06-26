@@ -9,7 +9,7 @@ There are two modes in UV.
 
 ---
 
-## 1) Project mode (the important one)
+## 1) PROJECT MODE (THE IMPORTANT ONE)
 
 uv treats the directory as a Python project with a `pyproject.toml`.
 
@@ -30,7 +30,7 @@ uv run …
 
 ---
 
-## 2) Environment / pip mode
+## 2) ENVIRONMENT / PIP MODE
 
 uv behaves like a fast `pip + venv` replacement. No `[project]` table, no lockfile-driven workflow.
 
@@ -50,7 +50,7 @@ uv pip install …
 
 ---
 
-## Activating a virtual environment
+## ACTIVATING A VIRTUAL ENVIRONMENT
 
 ```bash
 uv venv                        # Create .venv
@@ -62,7 +62,7 @@ In project mode, `uv run` activates the environment automatically — no manual 
 
 ---
 
-## dependency-groups vs optional-dependencies
+## DEPENDENCY-GROUPS VS OPTIONAL-DEPENDENCIES
 
 `[dependency-groups]` (PEP 735) are for dependencies that are only ever used locally during development — they're not part of the package at all, not even as an optional install. Only uv knows about them.
 

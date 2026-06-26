@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "7d07159577cc0b05",
+        "id": "c8e5d63a698158e8",
         "type": "tabs",
         "children": [
           {
-            "id": "e8feebcdadf654fe",
+            "id": "2cb6ad8a1b3d147f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -143,20 +143,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Brain 🧠.md",
+                "file": "Git and GitHub.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Brain 🧠"
+              "title": "Outline of Git and GitHub"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 252.5
+    "width": 252.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -169,23 +171,28 @@
       "bases:Create new base": false
     }
   },
-  "active": "e8feebcdadf654fe",
+  "active": "2cb6ad8a1b3d147f",
   "lastOpenFiles": [
+    "Brain.base",
+    "rrrGit and GitHub.md",
+    "Git and GitHub.md",
+    "Untitled 3.base",
+    "Untitled 2.base",
+    "Software Architecture Patterns.md",
+    "Untitled.base",
+    "Untitled 1.base",
+    "Untitled.canvas",
     "CLAUDE.md",
     "Terminal.md",
     "Institutions.md",
-    "Brain.base",
     "Ports and Adapters.md",
     "Software Architecture Patterns/Event Sourcing.md",
     "Saga Pattern.md",
     "CQRS.md",
-    "Software Architecture Patterns.md",
     "Software Architecture Patterns/Software Architecture Patterns.md",
     "UV Astral.md",
     "Software Architecture Patterns",
-    "Git and GitHub.md",
     "Git and GitHub.md.tmp.99578.a5469dffe469",
-    "Untitled.canvas",
     "Untitled 1.canvas",
     "Advanced Futures Trading Strategies.md",
     "Advanced Futures Trading Strategies.md.tmp.99578.5ad6d7ad89d9",

@@ -1,6 +1,6 @@
 # Obsidian Vault Writing Guide
 
-## File Structure
+## FILE STRUCTURE
 
 Every note must follow this exact order:
 
@@ -18,7 +18,7 @@ Rules:
 - The `# H1` heading immediately follows the closing `---`, no blank line
 - No duplicate content
 
-## Frontmatter Fields
+## FRONTMATTER FIELDS
 
 Required:
 
@@ -30,7 +30,7 @@ tags: [relevant, kebab-case, tags]
 
 - `tags`: lowercase, hyphenated, array format
 
-## Section Separators
+## SECTION SEPARATORS
 
 Separate every `## H2` section with a horizontal rule:
 
@@ -40,17 +40,19 @@ Separate every `## H2` section with a horizontal rule:
 ## Next Section
 ```
 
-## Heading Hierarchy
+## HEADING HIERARCHY
 
 ```
 # H1 — title only, one per file
-## H2 — major sections
-### H3 — subsections within a section
+## H2 — MAJOR SECTIONS (all caps)
+### H3 — SUBSECTIONS WITHIN A SECTION (all caps)
 ```
 
-Never skip levels (e.g., don't jump from H2 to H4).
+- H1 is the only heading that uses title case — it matches the note title.
+- H2 and below must be ALL CAPS.
+- Never skip levels (e.g., don't jump from H2 to H4).
 
-## Code Blocks
+## CODE BLOCKS
 
 Always specify the language:
 
@@ -66,7 +68,7 @@ x = 1
 
 For plain text or terminal output with no language, use ` ``` ` with no tag.
 
-## Internal Links
+## INTERNAL LINKS
 
 Use Obsidian wiki-links to reference other notes:
 
@@ -74,12 +76,12 @@ Use Obsidian wiki-links to reference other notes:
 [[Note Title]]
 ```
 
-## Lists
+## LISTS
 
 - Use `-` for unordered lists (not `*` or `+`)
 - Indent with 2 or 4 spaces for nested items
 
-## Tables
+## TABLES
 
 Align pipes for readability:
 
@@ -89,7 +91,7 @@ Align pipes for readability:
 | value    | value    |
 ```
 
-## Checklist for New Notes
+## CHECKLIST FOR NEW NOTES
 
 1. Frontmatter at the top with `tags`
 2. H1 heading matching the title

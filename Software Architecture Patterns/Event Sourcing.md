@@ -6,12 +6,12 @@ tags: [software-architecture, event-sourcing, patterns]
 Event Sourcing is an architectural pattern where state changes are stored as a sequence of immutable events, rather than persisting only the current state. The application state is derived by replaying those events from the beginning (or from a snapshot).
 
 ---
-## Core Concept
+## CORE CONCEPT
 
 Instead of updating a record in place, every change is appended as a new event to an event log. The current state is always a projection of that log.
 
 ---
-## Event Envelope vs. Event Payload
+## EVENT ENVELOPE VS. EVENT PAYLOAD
 
 > **The key distinction is between the event envelope and the event payload.**
 
@@ -21,7 +21,7 @@ Instead of updating a record in place, every change is appended as a new event t
 Keeping them separate allows the infrastructure (brokers, stores, projectors) to handle envelopes generically without needing to understand domain semantics locked inside the payload.
 
 ---
-## Benefits
+## BENEFITS
 
 - Full audit trail — every state transition is recorded
 - Temporal queries — reconstruct state at any point in time
@@ -29,14 +29,14 @@ Keeping them separate allows the infrastructure (brokers, stores, projectors) to
 - Debugging — replay events to reproduce any past state
 
 ---
-## Trade-offs
+## TRADE-OFFS
 
 - Increased storage — the log grows indefinitely (mitigated with snapshots)
 - Query complexity — current state requires projection or a read model ([[CQRS]])
 - Schema evolution — event payloads must be versioned carefully as the domain changes
 
 ---
-## Related Patterns
+## RELATED PATTERNS
 
 - [[CQRS]] — commonly paired with Event Sourcing to separate read and write models
 - [[Saga Pattern]] — orchestrates multi-step processes using events
