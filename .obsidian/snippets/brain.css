@@ -1,0 +1,178 @@
+/* Brain Vault — Light Fresh Theme */
+
+/* ════════════════════════════════════════
+   WIDER READING AREA
+   ════════════════════════════════════════ */
+body {
+  --file-line-width: 860px;
+}
+
+
+/* ════════════════════════════════════════
+   READING VIEW  (.markdown-preview-view)
+   ════════════════════════════════════════ */
+
+.markdown-preview-view h1 {
+  color: #1a2e44;
+  font-size: 1.85em;
+  font-weight: 700;
+  border-bottom: 2px solid #cce8f6;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.markdown-preview-view h2 {
+  color: #0077b6 !important;
+  font-size: 0.82em !important;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  background-color: #dbeafe !important;
+  border-left: 3px solid #0077b6;
+  padding: 6px 10px !important;
+  border-radius: 0 5px 5px 0;
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+.markdown-preview-view h3 {
+  color: #0d7a5f !important;
+  font-size: 0.76em !important;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  background-color: #d1fae5 !important;
+  border-left: 3px solid #34d399;
+  padding: 5px 10px !important;
+  border-radius: 0 5px 5px 0;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+.markdown-preview-view hr {
+  border: none;
+  border-top: 1px solid #d4ecf7;
+  margin: 28px 0;
+}
+
+.markdown-preview-view pre {
+  background-color: #f0f8ff !important;
+  border: 1px solid #cce4f6;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.markdown-preview-view pre code {
+  background: none !important;
+  color: #2c3e50;
+  padding: 0;
+}
+
+.markdown-preview-view :not(pre) > code {
+  background-color: #e4f2fb !important;
+  color: #0a6ea4 !important;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+.markdown-preview-view table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.markdown-preview-view th {
+  background-color: #e4f2fb;
+  color: #0077b6;
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid #cce4f6;
+}
+
+.markdown-preview-view td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #eaf2f8;
+}
+
+.markdown-preview-view tr:hover td {
+  background-color: #f5faff;
+}
+
+.markdown-preview-view blockquote {
+  border-left: 3px solid #90caf9;
+  background-color: #f5faff;
+  color: #546e7a;
+  padding: 8px 14px;
+  margin: 14px 0;
+  border-radius: 0 4px 4px 0;
+  font-style: italic;
+}
+
+.markdown-preview-view a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+.markdown-preview-view a:hover {
+  text-decoration: underline;
+  color: #005f96;
+}
+
+.markdown-preview-view strong {
+  color: #1a2e44;
+}
+
+
+/* ════════════════════════════════════════
+   LIVE PREVIEW  (.markdown-source-view)
+   ════════════════════════════════════════ */
+
+/* H1 text */
+.markdown-source-view.mod-cm6 .cm-header-1 {
+  color: #1a2e44 !important;
+}
+
+/* H2 — line background */
+.markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  background-color: #dbeafe !important;
+  border-left: 3px solid #0077b6 !important;
+  padding: 4px 10px !important;
+  border-radius: 0 5px 5px 0;
+  margin-top: 8px;
+  line-height: 1.4 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* H2 — text color and spacing */
+.markdown-source-view.mod-cm6 .cm-header-2 {
+  color: #0077b6 !important;
+  letter-spacing: 0.1em;
+  font-weight: 700 !important;
+}
+
+/* H3 — line background */
+.markdown-source-view.mod-cm6 .HyperMD-header-3 {
+  background-color: #d1fae5 !important;
+  border-left: 3px solid #34d399 !important;
+  padding: 4px 10px !important;
+  border-radius: 0 5px 5px 0;
+  margin-top: 6px;
+  line-height: 1.4 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* H3 — text color and spacing */
+.markdown-source-view.mod-cm6 .cm-header-3 {
+  color: #0d7a5f !important;
+  letter-spacing: 0.08em;
+  font-weight: 600 !important;
+}
+
+/* Inline code */
+.markdown-source-view.mod-cm6 .cm-inline-code {
+  background-color: #e4f2fb !important;
+  color: #0a6ea4 !important;
+  border-radius: 3px;
+  padding: 1px 4px;
+}
