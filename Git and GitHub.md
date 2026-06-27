@@ -18,20 +18,20 @@ tags: [git, github, workflow]
 
 ## CORE COMMANDS
 
-| Command | Purpose |
-|---|---|
-| `git init` | Turn current directory into a Git repo |
-| `git init <dir>` | Create empty Git repo in specified directory |
-| `rm -rf .git` | Undo `git init` |
-| `git clone <HTTPS/SSH>` | Clone a remote repo locally |
-| `git status` | Show working directory and staging area state |
-| `git add <file>` | Stage a file |
-| `git add .` | Stage everything in current path |
-| `git commit -m 'msg'` | Record staged changes to the repo |
-| `git push --set-upstream origin <branch>` | Push branch to remote for the first time |
-| `git pull <remote> <branch>` | Fetch and merge from remote |
-| `git log` | Show commit history with authors and dates |
-| `git show` | Show diff between last two commits |
+| Command                                   | Purpose                                       |
+| ----------------------------------------- | --------------------------------------------- |
+| `git init`                                | Turn current directory into a Git repo        |
+| `git init <dir>`                          | Create empty Git repo in specified directory  |
+| `rm -rf .git`                             | Undo `git init`                               |
+| `git clone <HTTPS/SSH>`                   | Clone a remote repo locally                   |
+| `git status`                              | Show working directory and staging area state |
+| `git add <file>`                          | Stage a file                                  |
+| `git add .`                               | Stage everything in current path              |
+| `git commit -m 'msg'`                     | Record staged changes to the repo             |
+| `git push --set-upstream origin <branch>` | Push branch to remote for the first time      |
+| `git pull <remote> <branch>`              | Fetch and merge from remote                   |
+| `git log`                                 | Show commit history with authors and dates    |
+| `git show`                                | Show diff between last two commits            |
 
 ---
 
