@@ -1,0 +1,5 @@
+.obsidian/*
+!.obsidian/snippets/
+.obsidian/snippets/*
+!.obsidian/snippets/brain.css
+.DS_Store
