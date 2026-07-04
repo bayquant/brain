@@ -44,12 +44,18 @@ az extension add --name containerapp --upgrade
 
 ## RESOURCE GROUP
 
+A logical container that holds related resources (ACR, Container Apps, storage, etc.) for a project or environment. Resources share a lifecycle with their group — deleting the group deletes everything inside it.
+
 ```bash
+# Create a resource group
 az group create \
   --name <resource-group> \
   --location eastus
 
+# List all resource groups
 az group list --output table
+
+# Delete a resource group (and everything inside it)
 az group delete --name <resource-group> --yes
 ```
 
@@ -66,8 +72,8 @@ az acr create \
   --name <registry-name> \
   --sku Basic
 
-# Login to registry
-az acr login --name <registry-name>
+# List all registries (in current subscription, or scope with --resource-group)
+az acr list --output table
 
 # Build and push image directly in ACR (no local Docker needed)
 az acr build \
@@ -84,6 +90,33 @@ az acr repository show-tags \
   --name <registry-name> \
   --repository <image-name> \
   --output table
+
+# Delete the whole registry
+az acr delete \
+  --resource-group <resource-group> \
+  --name <registry-name> \
+  --yes
+
+# Delete an entire repository (all tags/manifests under that image name)
+az acr repository delete \
+  --name <registry-name> \
+  --repository <image-name> \
+  --yes
+
+# Delete a single image tag
+az acr repository delete \
+  --name <registry-name> \
+  --image <image-name>:<tag> \
+  --yes
+```
+
+### DOCKER LOGIN
+
+`az login` only authenticates the Azure CLI (control plane) — it has no bearing on Docker, which talks to the registry directly over the [[Docker]] Registry HTTP API (data plane) and keeps its own separate credential store in `~/.docker/config.json`. `az acr login` bridges the two: it uses your existing `az login` session to fetch a short-lived ACR token and feeds it to Docker under the hood, equivalent to running `docker login` yourself.
+
+```bash
+# Authenticate Docker against the registry (required before docker push/pull)
+az acr login --name <registry-name>
 ```
 
 ---
@@ -311,3 +344,80 @@ az role assignment create \
 ```
 
 Same pattern applies to Container Jobs — replace `containerapp` with `containerapp job`.
+
+---
+
+## AZURE KEY VAULT
+
+Managed store for secrets, keys, and certificates — keeps credentials out of code, config files, and environment variables.
+
+```bash
+# Create a vault (RBAC authorization model — recommended)
+az keyvault create \
+  --name <vault-name> \
+  --resource-group <resource-group> \
+  --location eastus \
+  --enable-rbac-authorization true
+
+# List all vaults
+az keyvault list --output table
+
+# Delete a vault (soft-deleted, recoverable for retention period)
+az keyvault delete --name <vault-name>
+```
+
+### SECRETS
+
+```bash
+# Set a secret (creates it, or adds a new version if it already exists)
+az keyvault secret set \
+  --vault-name <vault-name> \
+  --name <secret-name> \
+  --value <secret-value>
+
+# Get the current value of a secret
+az keyvault secret show \
+  --vault-name <vault-name> \
+  --name <secret-name> \
+  --query value --output tsv
+
+# List all secrets in a vault (names only, not values)
+az keyvault secret list --vault-name <vault-name> --output table
+
+# Delete a secret (soft-deleted, recoverable)
+az keyvault secret delete --vault-name <vault-name> --name <secret-name>
+```
+
+### GRANTING ACCESS (RBAC)
+
+```bash
+VAULT_ID=$(az keyvault show --name <vault-name> --query id --output tsv)
+
+# Grant read access to secrets
+az role assignment create \
+  --assignee <principal-id-or-upn> \
+  --role "Key Vault Secrets User" \
+  --scope $VAULT_ID
+```
+
+### USING WITH MANAGED IDENTITY
+
+Same pattern as ACR above — grant the Container App's identity access to the vault instead of embedding a connection string.
+
+```bash
+PRINCIPAL_ID=$(az containerapp show \
+  --name <app-name> \
+  --resource-group <resource-group> \
+  --query identity.principalId --output tsv)
+
+az role assignment create \
+  --assignee $PRINCIPAL_ID \
+  --role "Key Vault Secrets User" \
+  --scope $VAULT_ID
+
+# Reference a secret directly as a Container App env var
+az containerapp secret set \
+  --name <app-name> \
+  --resource-group <resource-group> \
+  --secrets my-secret=keyvaultref:https://<vault-name>.vault.azure.net/secrets/<secret-name>,identityref:system
+```
