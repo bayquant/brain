@@ -123,6 +123,32 @@ docker container prune
 
 ---
 
+## RESTART POLICIES
+
+Controls whether Docker automatically restarts a container after it stops or the daemon restarts.
+
+```
+no             — never restart automatically (default)
+on-failure     — restart only if the container exits with a non-zero status
+always         — always restart, including after a manual `docker stop` + daemon restart
+unless-stopped — like always, but stays stopped if it was manually stopped before the daemon restarted
+```
+
+```bash
+# Apply at run time
+docker run -d --restart unless-stopped nginx
+
+# Restart on failure, capped at 5 attempts
+docker run -d --restart on-failure:5 nginx
+
+# Change the policy on an existing container
+docker update --restart unless-stopped <container>
+```
+
+`unless-stopped` is the most common default for long-running services — it survives host reboots but respects an intentional `docker stop`, whereas `always` would restart the container anyway. `on-failure` fits one-off or batch jobs where a clean exit (code 0) should stay stopped, but a crash should retry.
+
+---
+
 ## INSPECT AND DEBUG
 
 ```bash
