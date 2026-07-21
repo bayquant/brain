@@ -1,17 +1,6 @@
 # Brain
 
-A personal knowledge vault for software engineering, architecture, and trading systems built with Obsidian.
-
-## Structure
-
-This vault contains interconnected notes on:
-
-- **Architecture**: API Design, Ports and Adapters, CQRS, Event Sourcing, Saga Pattern
-- **Infrastructure**: Docker, Terraform, Azure Cloud, Terminal commands
-- **Development Tools**: Claude Code, Git and GitHub, pre-commit and ruff, UV Astral
-- **Domain Knowledge**: Trading Systems, Institutions, Advanced Futures Trading Strategies
-- **Security**: PEM and DER encryption formats
-- **Patterns**: Software Architecture Patterns, Caching, Logging
+A personal knowledge vault!
 
 ## Writing Guide
 
