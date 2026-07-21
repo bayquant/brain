@@ -40,6 +40,14 @@ Separate every `## H2` section with a horizontal rule:
 ## Next Section
 ```
 
+## MATH FORMULAS
+
+Always use Obsidian's built-in MathJax rendering for math — never plain-text or code-block approximations.
+
+- Inline math: wrap in single `$` (e.g. `$\varphi_i$`)
+- Display/block math: wrap in double `$$` on their own lines
+- Use proper LaTeX commands (`\frac`, `\sum`, `\left[...\right]`, Greek letters, etc.) instead of Unicode math symbols or ASCII approximations
+
 ## HEADING HIERARCHY
 
 ```

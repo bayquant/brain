@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "pre-commit-and-ruff.md",
+                "file": "Shapley Values.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "pre-commit-and-ruff"
+              "title": "Shapley Values"
             }
           }
         ]
@@ -173,10 +173,11 @@
   },
   "active": "354c9cf4088ea337",
   "lastOpenFiles": [
+    "pre-commit-and-ruff.md",
+    "Shapley Values.md",
     "brain/Azure Cloud.md",
     "brain/API Design.md",
     "brain/Advanced Futures Trading Strategies.md",
-    "pre-commit-and-ruff.md",
     "brain/UV Astral.md",
     "brain/Trading System.md",
     "brain/Terraform.md",
@@ -203,7 +204,6 @@
     "Azure Cloud.md",
     "Logging.md",
     "Terminal.md",
-    "UV Astral.md",
     "Azure Cloud.md.tmp.77953.8b9f65e49aea",
     "Untitled.canvas",
     "Brain.base",
