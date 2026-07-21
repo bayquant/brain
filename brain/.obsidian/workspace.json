@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "d1beb8a871bfce84",
+    "type": "split",
+    "children": [
+      {
+        "id": "c8e5d63a698158e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "354c9cf4088ea337",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2a30e8f5957d888b",
+    "type": "split",
+    "children": [
+      {
+        "id": "ba0a1a7e8f2bb0b2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fca5e627d8967d2b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7ba71de36a06ce9a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "90e07da068dfafe7",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "d06e462338c59f11",
+    "type": "split",
+    "children": [
+      {
+        "id": "83f49eb64329402e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec58e07cde9690af",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Git and GitHub.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Git and GitHub"
+            }
+          },
+          {
+            "id": "c334e21d1e05c228",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Git and GitHub.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Git and GitHub"
+            }
+          },
+          {
+            "id": "ca030502bb945222",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ca5c9ee52e4d072b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Git and GitHub.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Git and GitHub"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 252.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "354c9cf4088ea337",
+  "lastOpenFiles": [
+    "brain/Azure Cloud.md",
+    "brain/API Design.md",
+    "brain/Advanced Futures Trading Strategies.md",
+    "pre-commit-and-ruff.md",
+    "brain/UV Astral.md",
+    "brain/Trading System.md",
+    "brain/Terraform.md",
+    "brain/Terminal.md",
+    "brain/Software Architecture Patterns.md",
+    "brain/Software Architecture Patterns/Event Sourcing.md",
+    "brain/Software Architecture Patterns",
+    "brain/Saga Pattern.md",
+    "brain/pre-commit-and-ruff.md",
+    "brain/Ports and Adapters.md",
+    "brain/PEM and DER.md",
+    "brain/Logging.md",
+    "brain/Institutions.md",
+    "brain/Git and Terminal Commands.html",
+    "brain/Git and GitHub.md",
+    "brain/Docker.md",
+    "brain/CQRS.md",
+    "brain/CLAUDE.md",
+    "brain/Claude Code.md",
+    "brain/Caching.md",
+    "brain/Brain.base",
+    "brain",
+    "untitled folder",
+    "Azure Cloud.md",
+    "Logging.md",
+    "Terminal.md",
+    "UV Astral.md",
+    "Azure Cloud.md.tmp.77953.8b9f65e49aea",
+    "Untitled.canvas",
+    "Brain.base",
+    "Untitled 3.base",
+    "Untitled 2.base",
+    "Untitled.base",
+    "Untitled 1.canvas",
+    "Pasted image 20251019213716.png",
+    "Pasted image 20251019213722.png"
+  ]
+}
