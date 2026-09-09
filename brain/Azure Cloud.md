@@ -10,9 +10,14 @@ Subscription
 └── Resource Group
     ├── Azure Container Registry (ACR)
     ├── Log Analytics Workspace
+    │   └── Application Insights
+    ├── Key Vault
+    ├── Storage Account
     ├── Container Apps Environment
     │   ├── Container App
+    │   │   └── Managed Identity
     │   └── Container Job
+    │       └── Managed Identity
     └── (other resources)
 ```
 
@@ -27,6 +32,19 @@ brew install azure-cli
 # Login
 az login
 
+# Add Container Apps extension
+az extension add --name containerapp --upgrade
+```
+
+The core `az` CLI ships with only a minimal built-in command set. Specialized services like Container Apps live in separately-installed extensions.
+
+---
+
+## SUBSCRIPTION
+
+Top of the hierarchy. Subscriptions are provisioned outside the CLI (portal, enterprise agreement, etc.)
+
+```bash
 # Show active subscription
 az account show
 
@@ -35,16 +53,13 @@ az account list --output table
 
 # Set active subscription
 az account set --subscription "<subscription-id>"
-
-# Add Container Apps extension
-az extension add --name containerapp --upgrade
 ```
 
 ---
 
 ## RESOURCE GROUP
 
-A logical container that holds related resources (ACR, Container Apps, storage, etc.) for a project or environment. Resources share a lifecycle with their group — deleting the group deletes everything inside it.
+A logical container that holds related resources (ACR, Container Apps, storage, etc.) for a project or environment. Resources share a lifecycle with their group: deleting the group deletes everything inside it.
 
 ```bash
 # Create a resource group
@@ -75,13 +90,16 @@ az acr create \
 # List all registries (in current subscription, or scope with --resource-group)
 az acr list --output table
 
-# Build and push image directly in ACR (no local Docker needed)
-az acr build \
-  --registry <registry-name> \
-  --image <image-name>:<tag> \
-  --file Dockerfile \
-  .
+# Delete the whole registry
+az acr delete \
+  --resource-group <resource-group> \
+  --name <registry-name> \
+  --yes
+```
 
+### IMAGES & TAGS
+
+```bash
 # List images in registry
 az acr repository list --name <registry-name> --output table
 
@@ -91,18 +109,6 @@ az acr repository show-tags \
   --repository <image-name> \
   --output table
 
-# Delete the whole registry
-az acr delete \
-  --resource-group <resource-group> \
-  --name <registry-name> \
-  --yes
-
-# Delete an entire repository (all tags/manifests under that image name)
-az acr repository delete \
-  --name <registry-name> \
-  --repository <image-name> \
-  --yes
-
 # Delete a single image tag
 az acr repository delete \
   --name <registry-name> \
@@ -110,28 +116,33 @@ az acr repository delete \
   --yes
 ```
 
-### DOCKER LOGIN
-
-`az login` only authenticates the Azure CLI (control plane) — it has no bearing on Docker, which talks to the registry directly over the [[Docker]] Registry HTTP API (data plane) and keeps its own separate credential store in `~/.docker/config.json`. `az acr login` bridges the two: it uses your existing `az login` session to fetch a short-lived ACR token and feeds it to Docker under the hood, equivalent to running `docker login` yourself.
-
-```bash
-# Authenticate Docker against the registry (required before docker push/pull)
-az acr login --name <registry-name>
-```
-
 ---
 
-## CONTAINER APPS ENVIRONMENT
+## LOG ANALYTICS WORKSPACE
 
-Shared networking and logging boundary for your apps and jobs.
+Central store for logs and metrics: required by the Container Apps Environment, and the backend Application Insights writes to.
 
 ```bash
-# Create Log Analytics workspace (required)
+# Create workspace
 az monitor log-analytics workspace create \
   --resource-group <resource-group> \
   --workspace-name <workspace-name>
 
-# Get workspace credentials
+# List all workspaces
+az monitor log-analytics workspace list \
+  --resource-group <resource-group> \
+  --output table
+
+# Delete a workspace
+az monitor log-analytics workspace delete \
+  --resource-group <resource-group> \
+  --workspace-name <workspace-name> \
+  --yes
+```
+
+### GET CREDENTIALS (NEEDED FOR CONTAINER APPS ENVIRONMENT)
+
+```bash
 LOG_ANALYTICS_WORKSPACE_ID=$(az monitor log-analytics workspace show \
   --resource-group <resource-group> \
   --workspace-name <workspace-name> \
@@ -141,7 +152,60 @@ LOG_ANALYTICS_WORKSPACE_KEY=$(az monitor log-analytics workspace get-shared-keys
   --resource-group <resource-group> \
   --workspace-name <workspace-name> \
   --query primarySharedKey --output tsv)
+```
 
+---
+
+## AZURE KEY VAULT
+
+Managed store for secrets, keys, and certificates: keeps credentials out of code, config files, and environment variables.
+
+```bash
+# Create a vault (RBAC authorization model, recommended)
+az keyvault create \
+  --name <vault-name> \
+  --resource-group <resource-group> \
+  --location eastus \
+  --enable-rbac-authorization true
+
+# List all vaults
+az keyvault list --output table
+
+# Delete a vault (soft-deleted, recoverable for retention period)
+az keyvault delete --name <vault-name>
+```
+
+---
+
+## STORAGE ACCOUNT
+
+Blob/file/queue/table storage: used for things like Container Apps file-share mounts or Container Job outputs.
+
+```bash
+# Create a storage account
+az storage account create \
+  --name <account-name> \
+  --resource-group <resource-group> \
+  --location eastus \
+  --sku Standard_LRS
+
+# List all storage accounts
+az storage account list --output table
+
+# Delete a storage account
+az storage account delete \
+  --name <account-name> \
+  --resource-group <resource-group> \
+  --yes
+```
+
+---
+
+## CONTAINER APPS ENVIRONMENT
+
+Shared networking and logging boundary for your apps and jobs. Requires a Log Analytics Workspace (see [[#LOG ANALYTICS WORKSPACE]] for getting `$LOG_ANALYTICS_WORKSPACE_ID` / `$LOG_ANALYTICS_WORKSPACE_KEY`).
+
+```bash
 # Create environment
 az containerapp env create \
   --name <environment-name> \
@@ -152,13 +216,19 @@ az containerapp env create \
 
 # List environments
 az containerapp env list --resource-group <resource-group> --output table
+
+# Delete an environment
+az containerapp env delete \
+  --name <environment-name> \
+  --resource-group <resource-group> \
+  --yes
 ```
 
 ---
 
 ## CONTAINER APPS
 
-Long-running services — HTTP servers, APIs, workers.
+Long-running services: HTTP servers, APIs, workers.
 
 ### CREATE
 
@@ -240,7 +310,7 @@ az containerapp update \
 
 ## CONTAINER JOBS
 
-One-off or scheduled tasks — batch processing, cron jobs, pipelines.
+One-off or scheduled tasks: batch processing, cron jobs, pipelines.
 
 ### CREATE (MANUAL TRIGGER)
 
@@ -315,7 +385,7 @@ az containerapp job list --resource-group <resource-group> --output table
 
 ## MANAGED IDENTITY (RECOMMENDED FOR ACR AUTH)
 
-Avoid storing registry credentials — grant the app/job identity pull access to ACR instead.
+Avoid storing registry credentials. Grant the app/job identity pull access to ACR instead.
 
 ```bash
 # Enable system-assigned identity on a Container App
@@ -343,28 +413,11 @@ az role assignment create \
   --scope $ACR_ID
 ```
 
-Same pattern applies to Container Jobs — replace `containerapp` with `containerapp job`.
+Same pattern applies to Container Jobs: replace `containerapp` with `containerapp job`.
 
 ---
 
-## AZURE KEY VAULT
-
-Managed store for secrets, keys, and certificates — keeps credentials out of code, config files, and environment variables.
-
-```bash
-# Create a vault (RBAC authorization model — recommended)
-az keyvault create \
-  --name <vault-name> \
-  --resource-group <resource-group> \
-  --location eastus \
-  --enable-rbac-authorization true
-
-# List all vaults
-az keyvault list --output table
-
-# Delete a vault (soft-deleted, recoverable for retention period)
-az keyvault delete --name <vault-name>
-```
+## AZURE KEY VAULT — SECRETS & ACCESS
 
 ### SECRETS
 
@@ -402,7 +455,7 @@ az role assignment create \
 
 ### USING WITH MANAGED IDENTITY
 
-Same pattern as ACR above — grant the Container App's identity access to the vault instead of embedding a connection string.
+Same pattern as ACR above: grant the Container App's identity access to the vault instead of embedding a connection string.
 
 ```bash
 PRINCIPAL_ID=$(az containerapp show \
