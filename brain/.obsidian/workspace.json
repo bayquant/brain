@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Azure Cloud.md",
+                "file": "Quant Finance/Risk-Neutral Pricing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Azure Cloud"
+              "title": "Risk-Neutral Pricing"
             }
           }
         ]
@@ -174,12 +174,16 @@
   },
   "active": "6d6290111563deb3",
   "lastOpenFiles": [
+    "Quant Finance/Quant Finance.md",
+    "UV Astral.md",
+    "Quant Finance/Risk-Neutral Pricing.md",
+    "Quant Finance",
+    "Redis.md",
+    "Azure Cloud.md",
     "Linear Algebra/Eigenvector Centrality.md",
     "Linear Algebra/Linear Algebra.md",
     "Linear Algebra/Irreducibility.md",
-    "Azure Cloud.md",
     "Git and GitHub.md",
-    "UV Astral.md",
     "pre-commit-and-ruff.md",
     "Irreducibility.md",
     "Linear Algebra",
@@ -199,10 +203,7 @@
     "brain/Ports and Adapters.md",
     "brain/PEM and DER.md",
     "brain/Logging.md",
-    "brain/Institutions.md",
     "brain/Git and Terminal Commands.html",
-    "brain/Git and GitHub.md",
-    "brain/Docker.md",
     "brain/Brain.base",
     "brain",
     "untitled folder",
@@ -210,7 +211,6 @@
     "Untitled.canvas",
     "Brain.base",
     "Untitled 3.base",
-    "Untitled 2.base",
     "Untitled 1.canvas",
     "Pasted image 20251019213716.png",
     "Pasted image 20251019213722.png"
