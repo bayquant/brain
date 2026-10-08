@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c8e5d63a698158e8",
+        "id": "64c239ce34224418",
         "type": "tabs",
         "children": [
           {
-            "id": "6d6290111563deb3",
+            "id": "d4883be99c74f3c0",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Quant Finance/attachments/leibniz-terms.png"
+                "file": "Quant Finance/Calculus of Variations.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "leibniz-terms"
+              "icon": "lucide-file",
+              "title": "Calculus of Variations"
             }
           }
         ]
@@ -170,15 +172,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "6d6290111563deb3",
+  "active": "d4883be99c74f3c0",
   "lastOpenFiles": [
+    "Quant Finance/Concave Functions and Their Derivatives.md",
+    "Quant Finance/Calculus of Variations.md",
+    "Quant Finance/attachments/calculus-of-variations-perturbation.png",
+    "Quant Finance/Risk-Neutral Pricing.md",
+    "Quant Finance/Quant Finance.md",
+    "Quant Finance/Leibniz Integral Rule.md",
+    "Quant Finance/attachments/leibniz-terms.png",
     "Quant Finance/attachments/leibniz-snapshots.png",
     "Quant Finance/attachments/leibniz-decomposition.png",
-    "Quant Finance/Leibniz Integral Rule.md",
-    "Quant Finance/Risk-Neutral Pricing.md",
-    "Quant Finance/attachments/leibniz-terms.png",
     "Quant Finance/attachments",
-    "Quant Finance/Quant Finance.md",
     "UV Astral.md",
     "Quant Finance",
     "Redis.md",
@@ -203,7 +208,6 @@
     "brain/Software Architecture Patterns",
     "brain/Saga Pattern.md",
     "brain/pre-commit-and-ruff.md",
-    "brain/Ports and Adapters.md",
     "brain/Git and Terminal Commands.html",
     "brain/Brain.base",
     "brain",
