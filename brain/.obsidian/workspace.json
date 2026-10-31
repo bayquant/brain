@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Quant Finance/Calculus of Variations.md",
+                "file": "Quant Finance/Leibniz Integral Rule.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Calculus of Variations"
+              "title": "Leibniz Integral Rule"
             }
           }
         ]
@@ -174,12 +174,18 @@
   },
   "active": "d4883be99c74f3c0",
   "lastOpenFiles": [
-    "Quant Finance/Concave Functions and Their Derivatives.md",
+    "Cache Manifest.md",
+    "Quant Finance/Leibniz Integral Rule.md",
+    "Git and GitHub.md",
+    "Trading Desk with NautilusTrader.md",
+    "Python Modules and Entry Points.md",
+    "Ports and Adapters.md",
+    "pre-commit-and-ruff.md",
     "Quant Finance/Calculus of Variations.md",
+    "Quant Finance/Concave Functions and Their Derivatives.md",
     "Quant Finance/attachments/calculus-of-variations-perturbation.png",
     "Quant Finance/Risk-Neutral Pricing.md",
     "Quant Finance/Quant Finance.md",
-    "Quant Finance/Leibniz Integral Rule.md",
     "Quant Finance/attachments/leibniz-terms.png",
     "Quant Finance/attachments/leibniz-snapshots.png",
     "Quant Finance/attachments/leibniz-decomposition.png",
@@ -191,8 +197,6 @@
     "Linear Algebra/Eigenvector Centrality.md",
     "Linear Algebra/Linear Algebra.md",
     "Linear Algebra/Irreducibility.md",
-    "Git and GitHub.md",
-    "pre-commit-and-ruff.md",
     "Irreducibility.md",
     "Linear Algebra",
     "Shapley Values.md",
@@ -203,11 +207,7 @@
     "brain/Trading System.md",
     "brain/Terraform.md",
     "brain/Terminal.md",
-    "brain/Software Architecture Patterns.md",
-    "brain/Software Architecture Patterns/Event Sourcing.md",
     "brain/Software Architecture Patterns",
-    "brain/Saga Pattern.md",
-    "brain/pre-commit-and-ruff.md",
     "brain/Git and Terminal Commands.html",
     "brain/Brain.base",
     "brain",
