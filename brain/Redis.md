@@ -45,6 +45,48 @@ redis-server --port 6380
 
 ---
 
+## DOCKER
+
+For a Redis defined in a Compose file, such as `xpectral-trading/redis/compose.yaml`. Start Docker Desktop first, then run from the repo root. Don't also run a Homebrew Redis: both use port 6379.
+
+```bash
+# Start and wait until healthy
+docker compose -f redis/compose.yaml up -d --wait
+
+# Status, logs, restart, stop
+docker compose -f redis/compose.yaml ps
+docker compose -f redis/compose.yaml logs -f
+docker compose -f redis/compose.yaml restart
+docker compose -f redis/compose.yaml stop
+
+# Remove the container (data is kept; adding -v deletes it)
+docker compose -f redis/compose.yaml down
+
+# Open the redis-cli prompt
+docker compose -f redis/compose.yaml exec redis redis-cli
+
+# Run a single command
+docker compose -f redis/compose.yaml exec redis redis-cli PING
+```
+
+### Alias
+
+An alias typed at the prompt lasts only until that terminal session closes. To keep it, add this line to `~/.zshrc` (use the full path to the Compose file so it works from any folder):
+
+```bash
+alias rcli='docker compose -f path/to/compose.yaml exec redis redis-cli'
+```
+
+Then reload with `source ~/.zshrc`.
+
+```bash
+rcli            # open the prompt
+rcli PING       # single command
+unalias rcli    # remove it from the current session
+```
+
+---
+
 ## CLI
 
 ```bash
